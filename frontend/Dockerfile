@@ -1,4 +1,4 @@
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
 # Set working directory
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN npm ci
 COPY . .
 
 # Build the app
-RUN npm run build
+RUN npx react-scripts build
 
 FROM nginx:alpine
 

@@ -96,11 +96,16 @@ cd frontend
 npm run cypress:run
 ```
 
-### CI/CD
+## CI/CD
 
-- **CI Workflow**: Runs unit tests and builds Docker images on pushes/PRs.
-- **Docker Workflow**: Builds and pushes images to GHCR on pushes/PRs.
-- **E2E Workflow**: Runs full e2e tests on pushes (can be triggered manually).
+This project uses GitHub Actions for continuous integration and deployment:
+
+- **CI Workflow** (`.github/workflows/ci.yml`): Runs on pushes and PRs to main. Performs unit tests for backend and frontend, builds Docker images, and ensures code quality.
+- **Docker Workflow** (`.github/workflows/docker.yml`): Builds and pushes Docker images to GitHub Container Registry on pushes and PRs.
+- **E2E Workflow** (`.github/workflows/e2e.yml`): Runs end-to-end tests with the full application stack on pushes (manual trigger available).
+- **Dependabot** (`.github/dependabot.yml`): Automatically checks for dependency updates weekly.
+
+All workflows use Docker for consistent environments and support automated testing and deployment.
 
 ## Troubleshooting
 

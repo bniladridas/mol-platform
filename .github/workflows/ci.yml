@@ -37,12 +37,15 @@ jobs:
         cd backend
         pip install -r requirements.txt
 
-    - name: Run backend tests
+    - name: Run backend unit tests
       run: |
         cd backend
-        python -m pytest tests/ -v
-      env:
-        DATABASE_URL: postgresql://user:password@localhost/mol_platform
+        python -m pytest tests/test_molecule_generation.py -v
+
+    - name: Run backend e2e tests
+      run: |
+        cd backend
+        python -m pytest tests/e2e/ -v
 
     - name: Set up Node.js
       uses: actions/setup-node@v4

@@ -16,7 +16,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +41,7 @@
   "devDependencies": {
     "tailwindcss": "^3.4.3",
     "postcss": "^8.4.35",
-    "autoprefixer": "^10.4.18"
+    "autoprefixer": "^10.4.18",
+    "cypress": "^13.6.0"
   }
 }

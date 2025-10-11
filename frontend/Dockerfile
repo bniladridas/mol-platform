@@ -30,4 +30,4 @@ RUN npm install -g serve
 EXPOSE 3000
 
 # Start the app in production mode
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["serve", "-s", "build", "-p", "3000"]

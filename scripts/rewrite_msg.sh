@@ -16,4 +16,11 @@ COMMIT_MSG=$(echo "$COMMIT_MSG" | tr '[:upper:]' '[:lower:]')
 # Truncate to 60 chars
 COMMIT_MSG=$(echo "$COMMIT_MSG" | cut -c1-60)
 
+# Occasionally add a symbol
+if [ $((RANDOM % 3)) -eq 0 ]; then
+    symbols=(" →" " /" " _" " |" " -" " ~" " +" " *")
+    random_symbol=${symbols[$RANDOM % ${#symbols[@]}]}
+    COMMIT_MSG="$COMMIT_MSG$random_symbol"
+fi
+
 echo "$COMMIT_MSG"

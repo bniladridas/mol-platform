@@ -21,7 +21,7 @@ RUN ls -la public
 RUN npm run build --verbose
 
 # Debug: list build contents
-RUN ls -la build
+RUN ls -la build/
 
 # Install serve
 RUN npm install -g serve
@@ -30,4 +30,4 @@ RUN npm install -g serve
 EXPOSE 3000
 
 # Start the app in production mode
-CMD ["serve", "-s", "build", "-p", "3000"]
+CMD ["npx", "serve", "-s", "build", "-p", "3000"]

@@ -27,7 +27,9 @@ fi
 
 # Occasionally add a symbol
 if [ $((RANDOM % 3)) -eq 0 ]; then
-    echo " →" >> "$COMMIT_MSG_FILE"
+    symbols=(" →" " /" " _" " ✨" " 🚀" " 💡" " 🔧" " 🎉")
+    random_symbol=${symbols[$RANDOM % ${#symbols[@]}]}
+    echo "$random_symbol" >> "$COMMIT_MSG_FILE"
 fi
 
 echo "Commit message is valid"

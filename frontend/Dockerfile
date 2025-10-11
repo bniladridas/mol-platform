@@ -1,31 +1,25 @@
-FROM node:18-alpine
+FROM node:18-alpine as build
 
 # Set working directory
 WORKDIR /app
 
 # Install dependencies
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
 
 # Copy project files
 COPY . .
 
-# Debug: list files and contents
-RUN ls -la
-RUN ls -la src
-RUN ls -la public
+# Build the app
+RUN npm run build
 
-# Build the app with verbose output
-RUN npx react-scripts build
+FROM nginx:alpine
 
-# Debug: list build contents
-RUN ls -la build/
-
-# Install serve
-RUN npm install -g serve
+# Copy built app to nginx
+COPY --from=build /app/build /usr/share/nginx/html
 
 # Expose port
-EXPOSE 3000
+EXPOSE 80
 
-# Start the app in production mode
-CMD ["npx", "serve", "-s", "build", "-p", "3000"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

@@ -27,6 +27,7 @@ jobs:
       run: |
         docker compose up -d
         docker ps
+        docker exec mol-platform-frontend-1 ls -la build || echo 'build dir not found'
         docker logs mol-platform-backend-1
         docker logs mol-platform-frontend-1
         # Wait for backend to be ready

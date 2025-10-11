@@ -52,6 +52,9 @@ jobs:
       with:
         node-version: '18'
 
+    - name: Clean node_modules
+      run: rm -rf frontend/node_modules
+
     - name: Install frontend dependencies
       run: |
         cd frontend

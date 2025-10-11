@@ -18,6 +18,35 @@ docker-compose up --build
 * **API Documentation:** [http://localhost:8000/docs](http://localhost:8000/docs)
 * **Frontend Interface:** [http://localhost:3000](http://localhost:3000)
 
+## Troubleshooting
+
+**RDKit Import Error**
+
+If the Celery service fails to start due to an RDKit import error, ensure that `libxext6` is installed in the Celery Dockerfile.
+
+```bash
+apt-get install -y libxext6
+```
+
+Rebuild or restart the containers to apply the fix:
+
+```bash
+docker-compose up --build
+# or
+docker-compose restart
+```
+
+After this update, all platform services should start successfully.
+
+## Technologies
+
+- **Backend:** FastAPI, Python, RDKit
+- **Frontend:** React, Tailwind CSS
+- **Database:** PostgreSQL
+- **Cache/Queue:** Redis, Celery
+- **Proxy:** Nginx
+- **Containerization:** Docker, Docker Compose
+
 ## Contributing
 
 Contributions are encouraged.

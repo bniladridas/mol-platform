@@ -25,5 +25,10 @@ if [ ${#COMMIT_MSG} -gt 60 ]; then
     exit 1
 fi
 
+# Occasionally add a symbol
+if [ $((RANDOM % 3)) -eq 0 ]; then
+    echo " →" >> "$COMMIT_MSG_FILE"
+fi
+
 echo "Commit message is valid"
 exit 0

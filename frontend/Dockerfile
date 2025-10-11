@@ -16,7 +16,7 @@ RUN ls -la src
 RUN ls -la public
 
 # Build the app with verbose output
-RUN npm run build --verbose
+RUN npx react-scripts build
 
 # Debug: list build contents
 RUN ls -la build/

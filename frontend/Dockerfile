@@ -29,5 +29,5 @@ RUN npm install -g serve
 # Expose port
 EXPOSE 3000
 
-# Start the app in development mode
-CMD ["npm", "start"]
+# Start the app in production mode
+CMD ["serve", "-s", "build", "-l", "3000"]

@@ -15,7 +15,7 @@ numpy==1.26.2
 Pillow==10.1.0
 
 # Task Queue
-celery==5.3.4
+celery==5.5.3
 redis==5.0.1
 
 # Authentication

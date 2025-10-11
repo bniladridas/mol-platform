@@ -1,54 +1,59 @@
 # Molecular Design Platform
 
-A containerized application for molecular simulation and mutation analysis using microservices architecture with Docker.
+A **containerized microservice application** for molecular simulation, mutation analysis, and visualization — designed for reproducibility, modularity, and scalability using Docker.
 
 ## Prerequisites
-- [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Running the Platform
-```sh
+* [Docker](https://docs.docker.com/get-docker/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Run the Platform
+
+```bash
 docker-compose up --build
 ```
 
-## Accessing the Platform
-- **Backend API**: http://localhost:8000/docs
-- **Frontend**: http://localhost:3000
+## Access Points
+
+* **API Documentation:** [http://localhost:8000/docs](http://localhost:8000/docs)
+* **Frontend Interface:** [http://localhost:3000](http://localhost:3000)
 
 ## Contributing
-Contributions are welcome! Submit issues or pull requests.
 
-## Conventional Commits
+Contributions are encouraged.
+Please open an issue or submit a pull request for review.
 
-This project uses conventional commit standards for commit messages.
+## Commit Convention
+
+This project follows the **Conventional Commits** specification.
 
 ### Setup
 
-To enable commit message validation, copy the hook to your local git hooks:
+To enable local commit message validation:
 
-```sh
+```bash
 cp scripts/commit-msg .git/hooks/
 chmod +x .git/hooks/commit-msg
 ```
 
-### Standards
+### Format Rules
 
-Commit messages must:
-- Start with a type: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `build`, `revert`
-- Be lowercase
-- Be ≤ 60 characters for the first line
+* Begin with a type: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`, `ci`, `build`, `revert`
+* Use lowercase
+* Keep the summary ≤ 60 characters
 
-Example: `feat: add new molecule visualization`
+Example:
 
-### Rewriting History
-
-To rewrite existing commit messages, use the provided script:
-
-```sh
-bash scripts/rewrite_msg.sh <commit-message>
+```bash
+feat: add new molecule visualization
 ```
 
-For bulk rewriting, use git filter-branch (use with caution).
+### Rewriting Commits
 
-## License
-This project is licensed under the MIT License.
+To rewrite a specific commit message:
+
+```bash
+bash scripts/rewrite_msg.sh "<new-message>"
+```
+
+Use `git filter-branch` for bulk message rewrites (with caution).

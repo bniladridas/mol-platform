@@ -1,6 +1,6 @@
 import pytest
 from rdkit import Chem
-from app.main import MoleculeGenerator
+from src.main import MoleculeGenerator
 
 def test_generate_random_molecule():
     base_smiles = 'CC(=O)OC1=CC=CC=C1C(=O)O'  # Aspirin

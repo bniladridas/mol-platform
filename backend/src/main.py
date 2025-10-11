@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="Molecular Design Platform",
+    title="mol-platform",
     description="Advanced molecular generation and analysis system",
     version="0.1.0"
 )

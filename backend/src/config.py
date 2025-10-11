@@ -3,7 +3,7 @@ from typing import Optional
 
 class Settings(BaseSettings):
     # Database settings
-    DATABASE_URL: str = "postgresql://user:password@database/molecular_design"
+    DATABASE_URL: str = "postgresql://user:password@database/mol_platform"
     
     # Celery settings
     CELERY_BROKER_URL: str = "redis://redis:6379/0"

@@ -1,4 +1,4 @@
-# Molecular Design Platform
+# mol-platform
 
 A **containerized microservice application** for molecular simulation, mutation analysis, and visualization — designed for reproducibility, modularity, and scalability using Docker.
 
@@ -17,6 +17,50 @@ docker-compose up --build
 
 * **API Documentation:** [http://localhost:8000/docs](http://localhost:8000/docs)
 * **Frontend Interface:** [http://localhost:3000](http://localhost:3000)
+
+## API Endpoints
+
+### Generate Molecule
+**Endpoint:** `POST /generate_molecule`
+
+Generates a new molecule by applying random mutations to a base molecule.
+
+**Request Body:**
+```json
+{
+  "base_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+  "num_mutations": 3,
+  "mutation_types": ["substituent", "bond_order", "atom_swap"]
+}
+```
+
+**Response:**
+```json
+{
+  "original_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+  "generated_smiles": "CC(=O)OC1=CC=CC=C1C(=O)OC",
+  "molecular_image": "base64_encoded_png",
+  "properties": {
+    "Molecular Weight": 180.16,
+    "LogP": 1.31,
+    "H-Bond Donors": 1,
+    "H-Bond Acceptors": 3,
+    "Topological Polar Surface Area": 63.6
+  }
+}
+```
+
+### Health Check
+**Endpoint:** `GET /health`
+
+Returns the health status of the service.
+
+**Response:**
+```json
+{
+  "status": "healthy"
+}
+```
 
 ## Troubleshooting
 

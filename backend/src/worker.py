@@ -1,5 +1,5 @@
 from celery import Celery
-from app.config import settings
+from src.config import settings
 
 # Create Celery app
 app = Celery('tasks', 
@@ -13,7 +13,7 @@ app.conf.update(
 )
 
 # Import tasks to register them
-from app import tasks
+from src import tasks
 
 # This is important for Celery to discover tasks
 if __name__ == '__main__':

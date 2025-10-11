@@ -1,4 +1,4 @@
-from app.worker import app
+from src.worker import app
 import logging
 from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, Crippen, Draw

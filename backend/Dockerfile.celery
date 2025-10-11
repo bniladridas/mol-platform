@@ -24,4 +24,4 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH=/app
 
 # Use the full path to the Celery worker script and specify the app
-CMD ["celery", "-A", "app.worker.app", "worker", "--loglevel=info"]
+CMD ["celery", "-A", "src.worker.app", "worker", "--loglevel=info"]

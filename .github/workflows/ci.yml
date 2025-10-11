@@ -60,7 +60,7 @@ jobs:
     - name: Run frontend tests
       run: |
         cd frontend
-        npm test -- --watchAll=false --passWithNoTests
+        npx react-scripts test --watchAll=false --passWithNoTests
 
     - name: Build Docker images
       run: docker compose build

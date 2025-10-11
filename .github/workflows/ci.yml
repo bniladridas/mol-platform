@@ -55,7 +55,7 @@ jobs:
     - name: Install frontend dependencies
       run: |
         cd frontend
-        npm install
+        npm ci
 
     - name: Run frontend tests
       run: |
@@ -63,4 +63,4 @@ jobs:
         npm test -- --watchAll=false --passWithNoTests
 
     - name: Build Docker images
-      run: docker-compose build
+      run: docker compose build

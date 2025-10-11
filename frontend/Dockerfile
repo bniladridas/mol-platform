@@ -6,8 +6,6 @@ WORKDIR /app
 # Install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
-RUN npm install react-scripts
-RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
 # Copy project files
 COPY . .

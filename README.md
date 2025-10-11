@@ -117,11 +117,11 @@ This project uses GitHub Actions for continuous integration and deployment:
       schedule:
         interval: "weekly"
     - package-ecosystem: "docker"
-      directory: "/backend"
+      directory: "backend"
       schedule:
         interval: "weekly"
     - package-ecosystem: "docker"
-      directory: "/frontend"
+      directory: "frontend"
       schedule:
         interval: "weekly"
   ```

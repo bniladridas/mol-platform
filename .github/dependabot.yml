@@ -9,10 +9,10 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "docker"
-    directory: "/backend"
+    directory: "backend"
     schedule:
       interval: "weekly"
   - package-ecosystem: "docker"
-    directory: "/frontend"
+    directory: "frontend"
     schedule:
       interval: "weekly"

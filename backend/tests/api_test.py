@@ -2,6 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 import json
+import pytest
 
 # Load environment variables
 load_dotenv()
@@ -10,6 +11,9 @@ def test_nvidia_genmol_api():
     # Get API credentials
     api_key = os.getenv('NVIDIA_GENMOL_API_KEY')
     endpoint = os.getenv('NVIDIA_GENMOL_ENDPOINT')
+
+    if not api_key or not endpoint:
+        pytest.skip("NVIDIA API credentials not set")
 
     print(f"API Endpoint: {endpoint}")
     print(f"API Key (first 4 chars): {api_key[:4]}...")
@@ -52,7 +56,7 @@ def test_nvidia_genmol_api():
 
     except requests.exceptions.RequestException as e:
         print(f"\nRequest Error: {e}")
-        print(f"Full Error Details: {response.text}")
+        print(f"Full Error Details: {str(e)}")
 
 if __name__ == '__main__':
     test_nvidia_genmol_api()

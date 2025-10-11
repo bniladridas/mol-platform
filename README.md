@@ -105,6 +105,27 @@ This project uses GitHub Actions for continuous integration and deployment:
 - **E2E Workflow** (`.github/workflows/e2e.yml`): Runs end-to-end tests with the full application stack on pushes (manual trigger available).
 - **Dependabot** (`.github/dependabot.yml`): Automatically checks for dependency updates weekly.
 
+  ```yaml
+  version: 2
+  updates:
+    - package-ecosystem: "pip"
+      directory: "/backend"
+      schedule:
+        interval: "weekly"
+    - package-ecosystem: "npm"
+      directory: "/frontend"
+      schedule:
+        interval: "weekly"
+    - package-ecosystem: "docker"
+      directory: "/backend"
+      schedule:
+        interval: "weekly"
+    - package-ecosystem: "docker"
+      directory: "/frontend"
+      schedule:
+        interval: "weekly"
+  ```
+
 All workflows use Docker for consistent environments and support automated testing and deployment.
 
 ## Troubleshooting

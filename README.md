@@ -62,6 +62,46 @@ Returns the health status of the service.
 }
 ```
 
+## Testing
+
+### Unit Tests
+
+Run backend unit tests:
+```bash
+cd backend
+pip install -r requirements.txt
+python -m pytest tests/ -v
+```
+
+Run frontend unit tests:
+```bash
+cd frontend
+npm install
+npm test
+```
+
+### E2E Tests
+
+Run full-stack e2e tests locally:
+```bash
+# Start services
+docker-compose up -d
+
+# Run backend e2e
+cd backend
+python -m pytest tests/e2e/ -v
+
+# Run frontend e2e
+cd frontend
+npm run cypress:run
+```
+
+### CI/CD
+
+- **CI Workflow**: Runs unit tests and builds Docker images on pushes/PRs.
+- **Docker Workflow**: Builds and pushes images to GHCR on pushes/PRs.
+- **E2E Workflow**: Runs full e2e tests on pushes (can be triggered manually).
+
 ## Troubleshooting
 
 **RDKit Import Error**

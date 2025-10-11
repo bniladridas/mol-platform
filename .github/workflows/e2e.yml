@@ -21,11 +21,11 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Build Docker images
-      run: docker compose build
+      run: docker-compose build
 
     - name: Start services
       run: |
-        docker compose up -d
+        docker-compose up -d
         docker ps
         docker exec mol-platform-frontend-1 ls -la build || echo 'build dir not found'
         docker logs mol-platform-backend-1

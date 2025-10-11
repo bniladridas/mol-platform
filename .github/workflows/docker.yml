@@ -48,6 +48,7 @@ jobs:
         labels: ${{ steps.meta-backend.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        platforms: linux/amd64
 
     - name: Extract metadata for frontend
       id: meta-frontend
@@ -69,6 +70,7 @@ jobs:
         labels: ${{ steps.meta-frontend.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        platforms: linux/amd64
 
     - name: Extract metadata for celery
       id: meta-celery
@@ -91,3 +93,4 @@ jobs:
         labels: ${{ steps.meta-celery.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        platforms: linux/amd64

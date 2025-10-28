@@ -16,7 +16,7 @@ def test_nvidia_genmol_api():
         pytest.skip("NVIDIA API credentials not set")
 
     print(f"API Endpoint: {endpoint}")
-    print(f"API Key (first 4 chars): {api_key[:4]}...")
+    # API key loaded (value not logged)
 
     # Prepare headers and payload
     headers = {

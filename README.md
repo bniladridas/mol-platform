@@ -153,6 +153,10 @@ After this update, all platform services should start successfully.
 Contributions are encouraged.
 Please open an issue or submit a pull request for review.
 
+## Technical Notes
+
+The project now uses `random.choice` for cleaner, type-safe random selections in molecule mutations.
+
 ## Commit Convention
 
 This project follows the **Conventional Commits** specification.

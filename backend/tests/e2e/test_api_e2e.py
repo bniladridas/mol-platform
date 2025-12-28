@@ -21,3 +21,15 @@ def test_generate_molecule_endpoint():
     assert "generated_smiles" in data
     assert "molecular_image" in data
     assert "properties" in data
+
+
+def test_generate_molecule_validation():
+    # Test empty base_smiles
+    payload = {"base_smiles": "", "num_mutations": 1}
+    response = client.post("/generate_molecule", json=payload)
+    assert response.status_code == 400
+
+    # Test negative num_mutations
+    payload = {"base_smiles": "CCO", "num_mutations": -1}
+    response = client.post("/generate_molecule", json=payload)
+    assert response.status_code == 400

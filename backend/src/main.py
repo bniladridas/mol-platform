@@ -253,6 +253,14 @@ class MoleculeGenerator:
 
 @app.post("/generate_molecule", response_model=MoleculeResponse)
 async def generate_molecule(request: MoleculeGenerationRequest):
+    # Validate inputs
+    if not request.base_smiles or not request.base_smiles.strip():
+        raise HTTPException(status_code=400, detail="base_smiles cannot be empty")
+    if request.num_mutations < 0:
+        raise HTTPException(
+            status_code=400, detail="num_mutations must be non-negative"
+        )
+
     try:
         generator = MoleculeGenerator()
 

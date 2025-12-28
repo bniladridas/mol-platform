@@ -9,11 +9,8 @@ import numpy as np
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from rdkit import Chem, RDLogger
+from rdkit import Chem
 from rdkit.Chem import Descriptors, Draw
-
-# Suppress RDKit warnings and errors
-RDLogger.DisableLog("rdApp.*")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -236,13 +233,12 @@ class MoleculeGenerator:
             return mol
 
     @staticmethod
-    @lru_cache(maxsize=128)
     def calculate_properties(smiles: str) -> Dict[str, float]:
         mol = Chem.MolFromSmiles(smiles)
         if mol is None:
             return {}
         return {
-            "Molecular Weight": Descriptors.ExactMolWt(mol),
+            "Molecular Weight": Descriptors.MolWt(mol),
             "LogP": Descriptors.MolLogP(mol),
             "H-Bond Donors": Descriptors.NumHDonors(mol),
             "H-Bond Acceptors": Descriptors.NumHAcceptors(mol),

@@ -47,6 +47,18 @@ To initiate the platform:
 docker-compose up --build
 ```
 
+## Command Line Testing
+
+For testing without the web interface, use the provided CLI tool:
+
+```bash
+# Test health
+python cli.py --health
+
+# Generate molecule
+python cli.py --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
+```
+
 ## Local Development
 
 For development purposes without containerization:

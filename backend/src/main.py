@@ -8,8 +8,11 @@ import numpy as np
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from rdkit import Chem
+from rdkit import Chem, RDLogger
 from rdkit.Chem import Descriptors, Draw
+
+# Suppress RDKit warnings and errors
+RDLogger.DisableLog("rdApp.*")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

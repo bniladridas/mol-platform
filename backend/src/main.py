@@ -121,7 +121,7 @@ class MoleculeGenerator:
             try:
                 Chem.SanitizeMol(modified_mol)
                 return modified_mol
-            except:
+            except Exception:
                 return mol
         except Exception as e:
             print(f"Error in _add_random_substituent: {e}")
@@ -178,7 +178,7 @@ class MoleculeGenerator:
             try:
                 Chem.SanitizeMol(modified_mol)
                 return modified_mol
-            except:
+            except Exception:
                 return mol
         except Exception as e:
             print(f"Error in _modify_bond_order: {e}")
@@ -225,7 +225,7 @@ class MoleculeGenerator:
             try:
                 Chem.SanitizeMol(modified_mol)
                 return modified_mol
-            except:
+            except Exception:
                 return mol
         except Exception as e:
             print(f"Error in _swap_atom: {e}")

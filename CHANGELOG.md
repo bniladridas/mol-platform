@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/specificati
 
 ## [1.0.0] - 2025-12-28
 
+### Released
+- Official 1.0.0 release with all improvements
+
 ### Added
 - Initial release of mol-platform: containerized microservice for molecular simulation
 - Molecule generation with random mutations (substituents, bond orders, atom swaps)

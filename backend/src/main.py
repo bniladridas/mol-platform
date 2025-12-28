@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="mol-platform",
-    description="Advanced molecular generation and analysis system",
-    version="0.1.0",
+    description="Containerized microservice for molecular simulation and mutation analysis",
+    version="1.0.0",
 )
 
 # CORS Configuration

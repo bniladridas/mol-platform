@@ -1,6 +1,6 @@
 # mol-platform
 
-A containerized microservice for molecular analysis, simulation, and visualization. Developed with consideration for reproducibility, modularity, and scalability through Docker. Includes provisions for AI-powered molecular generation.
+A containerized microservice for molecular generation and analysis. Generates molecular variants through systematic mutations using RDKit. Features a REST API, web interface, and CLI tool with secure API key authentication.
 
 ---
 

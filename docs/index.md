@@ -1,6 +1,6 @@
 # mol-platform
 
-A **containerized microservice application** for molecular simulation, mutation analysis, and visualization — designed for reproducibility, modularity, and scalability using Docker.
+A **containerized microservice application** for molecular generation and analysis using RDKit — designed for reproducibility, modularity, and scalability using Docker. Generates molecular variants through systematic mutations with secure API access.
 
 ## Features
 

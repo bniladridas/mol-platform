@@ -1,5 +1,5 @@
 site_name: mol-platform
-site_description: Containerized microservice for molecular simulation and mutation analysis
+site_description: Containerized microservice for molecular generation and analysis with RDKit
 site_author: Your Name
 site_url: https://bniladridas.github.io/mol-platform
 

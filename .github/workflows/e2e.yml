@@ -28,6 +28,9 @@ jobs:
     - name: Build Docker images
       run: docker-compose build
 
+    - name: Create .env file
+      run: echo "API_KEY=${{ secrets.API_KEY }}" > .env
+
     - name: Start services
       run: |
         docker-compose up -d
@@ -36,7 +39,7 @@ jobs:
         docker logs mol-platform_backend_1
         docker logs mol-platform_frontend_1
         # Wait for backend to be ready
-        timeout 60 bash -c 'until curl -f http://localhost:8000/health; do sleep 2; done'
+        timeout 60 bash -c 'until curl -f -H "Authorization: Bearer ${{ secrets.API_KEY }}" http://localhost:8000/health; do sleep 2; done'
         # Wait for frontend to be ready
         timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
 

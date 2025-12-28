@@ -42,7 +42,7 @@ jobs:
     - name: Run backend unit tests
       run: |
         cd backend
-        python -m pytest tests/test_molecule_generation.py -v
+        API_KEY=${{ secrets.API_KEY }} python -m pytest tests/test_molecule_generation.py -v
 
     - name: Run backend e2e tests
       run: |

@@ -1,6 +1,6 @@
 # mol-platform
 
-A **containerized microservice application** for molecular simulation, mutation analysis, and visualization — designed for reproducibility, modularity, and scalability using Docker.
+A containerized microservice for molecular analysis, simulation, and visualization. Developed with consideration for reproducibility, modularity, and scalability through Docker.
 
 ---
 
@@ -39,26 +39,28 @@ node --version
 
 ---
 
-## Run the Platform
+## Execution
+
+To initiate the platform:
 
 ```bash
 docker-compose up --build
 ```
 
-## Run Locally (Development)
+## Local Development
 
-For local development without Docker:
+For development purposes without containerization:
 
-### Backend
+### Backend Configuration
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python src/main.py
 ```
 
-### Frontend
+### Frontend Configuration
 ```bash
 cd frontend
 npm install
@@ -67,26 +69,66 @@ npx react-scripts start
 
 ## Access Points
 
-* **API Documentation:** [http://localhost:8000/docs](http://localhost:8000/docs)
-* **Frontend Interface:** [http://localhost:3000](http://localhost:3000)
+- **API Documentation:** http://localhost:8000/docs
+- **Frontend Interface:** http://localhost:3000
 
 ---
 
-## API Endpoints
+## API Reference
 
-### Generate Molecule
+### Molecule Generation
 
 **Endpoint:** `POST /generate_molecule`
 
-Generates a new molecule by applying random mutations to a base molecule.
+Facilitates the creation of molecular variants through systematic mutations.
 
-**Request Body**
+**Request Structure**
 
 ```json
 {
   "base_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
   "num_mutations": 3,
   "mutation_types": ["substituent", "bond_order", "atom_swap"]
+}
+```
+
+**Parameters:**
+- `base_smiles`: SMILES representation (required)
+- `num_mutations`: Mutation count (optional, default: 3)
+- `mutation_types`: Permitted mutation categories (optional)
+
+**Response Structure:**
+```json
+{
+  "original_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+  "generated_smiles": "CC(=O)Oc1cSCN)cccc1C(=O)O",
+  "molecular_image": "base64_encoded_png",
+  "properties": {
+    "Molecular Weight": 180.16,
+    "LogP": 1.31,
+    "H-Bond Donors": 1,
+    "H-Bond Acceptors": 3,
+    "Topological Polar Surface Area": 63.6
+  }
+}
+```
+
+**Available Mutations:**
+- `substituent`: Introduces substituent groups
+- `bond_order`: Adjusts bonding configurations
+- `atom_swap`: Exchanges atomic elements
+
+### Health Verification
+
+**Endpoint:** `GET /health`
+
+Provides service status confirmation.
+
+**Response Structure:**
+```json
+{
+  "status": "healthy",
+  "version": "1.0.0"
 }
 ```
 

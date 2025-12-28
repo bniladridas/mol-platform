@@ -32,18 +32,21 @@ brew install git
    No additional installation required. Everything runs in containers.
 
 3. **For local development:**
+
+   #### Backend Setup
    ```bash
-   # Backend setup
    cd backend
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install -r requirements.txt
-   python src/main.py  # Start backend server
+   python src/main.py  # Start backend server on http://localhost:8000
+   ```
 
-   # Frontend setup (in separate terminal)
-   cd ../frontend
+   #### Frontend Setup (Run in Separate Terminal)
+   ```bash
+   cd frontend
    npm install
-   npx react-scripts start  # Start frontend development server
+   npx react-scripts start  # Start frontend on http://localhost:3000
    ```
 
 ## Next Steps

@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/specificati
 - LRU caching for performance
 - Environment configuration with .env.example
 - Complete documentation
+- CLI packaged as standalone binary with `mol-platform` command
 
 ### Fixed
 - Corrected SMILES string manipulation with proper RDKit molecular editing

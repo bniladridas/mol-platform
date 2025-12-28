@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -37,12 +38,18 @@ jobs:
           cd backend
           pyinstaller --onefile src/cli.py --name mol-platform
 
-      - name: Upload binary
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: matrix.os == 'ubuntu-latest'
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: backend/dist/mol-platform${{ matrix.os == 'windows-latest' && '.exe' || '' }}
-          asset_name: mol-platform-${{ matrix.target }}${{ matrix.os == 'windows-latest' && '.exe' || '' }}
-          asset_content_type: application/octet-stream
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
+      - name: Upload binary
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: backend/dist/mol-platform${{ matrix.os == 'windows-latest' && '.exe' || '' }}

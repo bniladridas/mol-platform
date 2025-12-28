@@ -1,11 +1,12 @@
 from fastapi.testclient import TestClient
 
 from src.main import app
+from src.config import settings
 
 client = TestClient(app)
 
 
-headers = {"Authorization": "Bearer test-key"}
+headers = {"Authorization": f"Bearer {settings.API_KEY}"}
 
 
 def test_health_endpoint():

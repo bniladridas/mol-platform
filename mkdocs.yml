@@ -1,0 +1,47 @@
+site_name: mol-platform
+site_description: Containerized microservice for molecular simulation and mutation analysis
+site_author: Your Name
+site_url: https://bniladridas.github.io/mol-platform
+
+repo_name: bniladridas/mol-platform
+repo_url: https://github.com/bniladridas/mol-platform
+
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: installation.md
+      - Quick Start: quickstart.md
+      - Configuration: configuration.md
+  - API Documentation:
+      - Overview: api/overview.md
+      - Endpoints: api/endpoints.md
+  - Development:
+      - Contributing: contributing.md
+      - Testing: testing.md
+      - CI/CD: cicd.md
+  - Changelog: changelog.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/bniladridas/mol-platform

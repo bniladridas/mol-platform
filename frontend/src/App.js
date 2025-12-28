@@ -3,9 +3,14 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Configure axios base URL
+// Configure axios base URL and auth
 const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
+const apiKey = process.env.REACT_APP_API_KEY;
+
 axios.defaults.baseURL = backendUrl;
+if (apiKey) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${apiKey}`;
+}
 
 function App() {
   const [baseMolecule, setBaseMolecule] = useState('');

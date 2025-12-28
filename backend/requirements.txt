@@ -1,18 +1,18 @@
 # Core Web Framework
-fastapi==0.104.1
-uvicorn==0.24.0
-pydantic==2.5.2
-pydantic-settings==2.1.0
+fastapi
+uvicorn
+pydantic
+pydantic-settings
 
 # Database
-sqlalchemy==2.0.23
-alembic==1.13.1
-psycopg2-binary==2.9.9
+# sqlalchemy==2.0.23
+# alembic==1.13.1
+# psycopg2-binary==2.9.9
 
 # Molecular Libraries
-rdkit-pypi==2022.9.5
-numpy==1.26.2
-Pillow==10.1.0
+rdkit==2025.9.3
+numpy
+Pillow
 
 # Task Queue
 celery==5.3.4

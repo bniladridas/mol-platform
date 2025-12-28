@@ -11,7 +11,7 @@ from pydantic import BaseModel
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Draw
 
-from config import settings
+from .config import settings
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

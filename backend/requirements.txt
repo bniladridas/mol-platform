@@ -10,7 +10,7 @@ pydantic-settings
 # psycopg2-binary==2.9.9
 
 # Molecular Libraries
-rdkit==2024.9.4
+rdkit==2025.9.3
 numpy
 Pillow
 

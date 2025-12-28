@@ -22,32 +22,36 @@ brew install git
 
 ## Installation Steps
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/bniladridas/mol-platform.git
-   cd mol-platform
-   ```
+### 1. Clone the Repository
 
-2. **For Docker deployment (recommended):**
-   No additional installation required. Everything runs in containers.
+```bash
+git clone https://github.com/bniladridas/mol-platform.git
+cd mol-platform
+```
 
-3. **For local development:**
+### 2. Choose Your Installation Method
 
-   #### Backend Setup
-   ```bash
-   cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   python src/main.py  # Start backend server on http://localhost:8000
-   ```
+#### Option A: Docker Deployment (Recommended)
 
-   #### Frontend Setup (Run in Separate Terminal)
-   ```bash
-   cd frontend
-   npm install
-   npx react-scripts start  # Start frontend on http://localhost:3000
-   ```
+No additional setup required. Docker handles all dependencies.
+
+#### Option B: Local Development Setup
+
+##### Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python src/main.py  # Starts on http://localhost:8000
+```
+
+##### Frontend Setup (Run in Separate Terminal)
+```bash
+cd frontend
+npm install
+npx react-scripts start  # Starts on http://localhost:3000
+```
 
 ## Next Steps
 

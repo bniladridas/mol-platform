@@ -4,7 +4,7 @@ The mol-platform CLI provides command-line access to molecular generation and te
 
 ## Overview
 
-The CLI tool (`cli.py`) allows you to interact with the mol-platform API without the web interface, making it ideal for:
+The CLI tool (`mol-platform`) allows you to interact with the mol-platform API without the web interface, making it ideal for:
 
 - Automated testing
 - Scripting and integration
@@ -13,7 +13,15 @@ The CLI tool (`cli.py`) allows you to interact with the mol-platform API without
 
 ## Installation
 
-No additional installation required. The CLI is included with the codebase.
+Build and install the CLI package:
+
+```bash
+cd backend
+python3 -m venv venv && source venv/bin/activate && pip install build && python -m build
+pipx install dist/mol_platform-1.0.0-py3-none-any.whl
+```
+
+This installs the `mol-platform` command globally.
 
 ## Usage
 
@@ -24,7 +32,7 @@ No additional installation required. The CLI is included with the codebase.
 Execute single commands directly:
 
 ```bash
-python cli.py [OPTIONS] COMMAND
+mol-platform [OPTIONS] COMMAND
 ```
 
 #### 2. Interactive Mode
@@ -32,7 +40,7 @@ python cli.py [OPTIONS] COMMAND
 Start an interactive session for multiple commands:
 
 ```bash
-python cli.py --interactive
+mol-platform --interactive
 ```
 
 ### Options
@@ -48,7 +56,7 @@ python cli.py --interactive
 Test backend connectivity:
 
 ```bash
-python cli.py --health
+mol-platform --health
 ```
 
 **Output:**
@@ -65,7 +73,7 @@ Connecting to http://localhost:8000
 Generate molecules with mutations:
 
 ```bash
-python cli.py --generate "SMILES_STRING" [OPTIONS]
+mol-platform --generate "SMILES_STRING" [OPTIONS]
 ```
 
 **Options:**
@@ -76,13 +84,13 @@ python cli.py --generate "SMILES_STRING" [OPTIONS]
 
 ```bash
 # Basic generation
-python cli.py --generate "CCO"
+mol-platform --generate "CCO"
 
 # Custom mutations
-python cli.py --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
+mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
 
 # Specific mutation types
-python cli.py --generate "CCO" --types substituent
+mol-platform --generate "CCO" --types substituent
 ```
 
 **Sample Output:**
@@ -109,7 +117,7 @@ Generating molecule from: CCO
 Start interactive session:
 
 ```bash
-python cli.py --interactive
+mol-platform --interactive
 ```
 
 **Interactive Commands:**
@@ -166,7 +174,7 @@ Goodbye! 👋
 Test backend connectivity:
 
 ```bash
-python cli.py --health
+mol-platform --health
 ```
 
 **Output:**
@@ -183,7 +191,7 @@ Connecting to http://localhost:8000
 Generate molecules with mutations:
 
 ```bash
-python cli.py --generate "SMILES_STRING" [OPTIONS]
+mol-platform --generate "SMILES_STRING" [OPTIONS]
 ```
 
 **Options:**
@@ -194,13 +202,13 @@ python cli.py --generate "SMILES_STRING" [OPTIONS]
 
 ```bash
 # Basic generation
-python cli.py --generate "CCO"
+mol-platform --generate "CCO"
 
 # Custom mutations
-python cli.py --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
+mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
 
 # Specific mutation types
-python cli.py --generate "CCO" --types substituent atom_swap
+mol-platform --generate "CCO" --types substituent atom_swap
 ```
 
 **Sample Output:**
@@ -243,8 +251,8 @@ The CLI provides clear error messages:
 ```yaml
 - name: Test CLI
   run: |
-    python cli.py --health
-    python cli.py --generate "CCO"
+    mol-platform --health
+    mol-platform --generate "CCO"
 ```
 
 ### Scripting
@@ -253,12 +261,12 @@ The CLI provides clear error messages:
 import subprocess
 
 # Health check
-result = subprocess.run(["python", "cli.py", "--health"], capture_output=True)
+result = subprocess.run(["mol-platform", "--health"], capture_output=True)
 print("Exit code:", result.returncode)
 
 # Generation
 result = subprocess.run([
-    "python", "cli.py", "--generate", "CCO", "--mutations", "1"
+    "mol-platform", "--generate", "CCO", "--mutations", "1"
 ], capture_output=True)
 print("Output:", result.stdout.decode())
 ```
@@ -276,7 +284,7 @@ print("Output:", result.stdout.decode())
    - Use tools like ChemDraw for validation
 
 3. **Permission Errors**
-   - Ensure execute permissions: `chmod +x cli.py`
+   - Ensure the package is installed correctly with pipx
 
 ### Debug Mode
 

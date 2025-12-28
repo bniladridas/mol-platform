@@ -49,14 +49,19 @@ docker-compose up --build
 
 ## Command Line Testing
 
-For testing without the web interface, use the provided CLI tool:
+For testing without the web interface, install and use the provided CLI tool:
 
 ```bash
+# Build and install CLI (one-time)
+cd backend
+python3 -m venv venv && source venv/bin/activate && pip install build && python -m build
+pipx install dist/mol_platform-1.0.0-py3-none-any.whl
+
 # Test health
-python cli.py --health
+mol-platform --health
 
 # Generate molecule
-python cli.py --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
+mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
 ```
 
 ## Local Development

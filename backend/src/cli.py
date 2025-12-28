@@ -188,12 +188,12 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python cli.py --health
-  python cli.py --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
-  python cli.py --interactive
+  mol-platform --health
+  mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
+  mol-platform --interactive
 
 Interactive mode:
-  python cli.py --interactive
+  mol-platform --interactive
   Then type commands like: generate CCO, set mutations 5, health, etc.
         """,
     )

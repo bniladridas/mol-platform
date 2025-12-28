@@ -49,6 +49,23 @@ cd frontend
 npm test
 ```
 
+## CLI Usage
+
+Once the backend is running, install and use the CLI for command-line access:
+
+```bash
+# Install CLI
+cd backend
+python3 -m venv venv && source venv/bin/activate && pip install build && python -m build
+pipx install dist/mol_platform-1.0.0-py3-none-any.whl
+
+# Test health
+mol-platform --health
+
+# Generate molecule
+mol-platform --generate "CCO"
+```
+
 ## What's Next?
 
 - [API Documentation](../api/overview.md)

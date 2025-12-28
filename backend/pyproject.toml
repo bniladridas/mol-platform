@@ -10,7 +10,7 @@ dependencies = [
     "uvicorn",
     "pydantic",
     "pydantic-settings",
-    "rdkit==2024.9.4",
+     "rdkit==2025.9.3",
     "numpy",
     "Pillow",
     "celery==5.3.4",
@@ -23,8 +23,11 @@ dependencies = [
     "pytest==7.4.4",
     "httpx==0.25.2",
     "python-dotenv==1.0.0",
-    "requests==2.31.0",
+     "requests==2.31.0",
 ]
+
+[project.scripts]
+mol-platform = "cli:main"
 
 [tool.ruff]
 line-length = 88

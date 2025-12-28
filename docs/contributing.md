@@ -5,7 +5,7 @@ We welcome contributions to mol-platform! Please follow these guidelines.
 ## Development Setup
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/your-username/mol-platform.git`
+2. Clone your fork: `git clone https://github.com/bniladridas/mol-platform.git`
 3. Set up development environment (see [Installation](installation.md))
 4. Create a feature branch: `git checkout -b feature/your-feature`
 

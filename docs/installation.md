@@ -46,6 +46,18 @@ pip install -r requirements.txt
 python src/main.py  # Starts on http://localhost:8000
 ```
 
+##### API Key Setup
+
+The backend requires an API key for authentication. Generate a secure key:
+
+```bash
+openssl rand -hex 32
+```
+
+For Docker: Set `API_KEY=your-generated-key` in your environment or create a `.env` file.
+
+For Local: Copy `backend/.env.example` to `backend/.env` and set `API_KEY=your-generated-key`.
+
 ##### Frontend Setup (Run in Separate Terminal)
 ```bash
 cd frontend

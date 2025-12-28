@@ -22,6 +22,7 @@ nav:
   - Home: index.md
   - Getting Started:
       - Installation: installation.md
+      - API Authentication: api-auth.md
       - Quick Start: quickstart.md
       - Configuration: configuration.md
   - Usage:

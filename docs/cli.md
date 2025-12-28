@@ -21,7 +21,7 @@ python3 -m venv venv && source venv/bin/activate && pip install build && python 
 pipx install dist/mol_platform-1.0.0-py3-none-any.whl
 ```
 
-This installs the `mol-platform --api-key your-key` command globally.
+This installs the `mol-platform` command globally. Provide the API key with `--api-key` (must match the backend's `API_KEY`).
 
 ## Usage
 

@@ -7,6 +7,7 @@ from typing import List, Dict
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Draw
 import numpy as np
+import random
 import base64
 import io
 
@@ -75,11 +76,8 @@ class MoleculeGenerator:
             return None
 
         try:
-            # Possible substituents
-            substituents = ["C", "CC", "N", "O", "Cl", "Br"]
-
-            # Convert to SMILES to work with string representation
-            mol_smiles = Chem.MolToSmiles(mol, isomericSmiles=True)
+            # Possible substituents (single atoms for simplicity)
+            substituents = ["C", "N", "O", "Cl", "Br"]
 
             # Find atoms where substituents can be added
             attachable_atoms = [
@@ -91,6 +89,28 @@ class MoleculeGenerator:
             # If no attachable atoms, return original molecule
             if not attachable_atoms:
                 return mol
+
+            # Randomly select an atom to attach substituent
+            attach_atom_idx = int(np.random.choice(attachable_atoms))
+            substituent_symbol = np.random.choice(substituents)
+
+            # Create editable molecule
+            rw_mol = Chem.RWMol(mol)
+
+            # Add new atom
+            new_atom = Chem.Atom(substituent_symbol)
+            new_idx = rw_mol.AddAtom(new_atom)
+
+            # Add bond between attach atom and new atom
+            rw_mol.AddBond(attach_atom_idx, new_idx, Chem.BondType.SINGLE)
+
+            # Get immutable molecule
+            modified_mol = rw_mol.GetMol()
+
+            return modified_mol
+        except Exception as e:
+            print(f"Error in _add_random_substituent: {e}")
+            return mol
 
             # Randomly select an atom to attach substituent
             attach_atom_idx = int(np.random.choice(attachable_atoms))
@@ -142,7 +162,7 @@ class MoleculeGenerator:
             bond_orders = [bo for bo in bond_orders if bo != current_bond_type]
 
             # Select a new bond order
-            new_bond_type = np.random.choice(bond_orders)
+            new_bond_type = random.choice(bond_orders)
 
             # Create an editable molecule
             rw_mol = Chem.RWMol(mol)
@@ -175,9 +195,6 @@ class MoleculeGenerator:
             # Get atom types to swap
             atom_types = ["C", "N", "O", "S", "P"]
 
-            # Convert to SMILES to work with string representation
-            mol_smiles = Chem.MolToSmiles(mol, isomericSmiles=True)
-
             # Find atoms that can be swapped
             swappable_atoms = [
                 i
@@ -188,6 +205,29 @@ class MoleculeGenerator:
             # If no swappable atoms, return original molecule
             if not swappable_atoms:
                 return mol
+
+            # Randomly select an atom to swap
+            atom_to_swap_idx = int(np.random.choice(swappable_atoms))
+            current_atom = mol.GetAtomWithIdx(atom_to_swap_idx).GetSymbol()
+
+            # Get possible swap atoms (excluding current atom)
+            swap_options = [at for at in atom_types if at != current_atom]
+            new_atom_symbol = np.random.choice(swap_options)
+
+            # Create editable molecule and swap atom
+            rw_mol = Chem.RWMol(mol)
+            pt = Chem.GetPeriodicTable()
+            rw_mol.GetAtomWithIdx(atom_to_swap_idx).SetAtomicNum(
+                pt.GetAtomicNumber(new_atom_symbol)
+            )
+
+            # Get immutable molecule
+            modified_mol = rw_mol.GetMol()
+
+            return modified_mol
+        except Exception as e:
+            print(f"Error in _swap_atom: {e}")
+            return mol
 
             # Randomly select an atom to swap
             atom_to_swap_idx = int(np.random.choice(swappable_atoms))

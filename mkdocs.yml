@@ -24,6 +24,8 @@ nav:
       - Installation: installation.md
       - Quick Start: quickstart.md
       - Configuration: configuration.md
+  - Usage:
+      - Command Line Interface: cli.md
   - API Documentation:
       - Overview: api/overview.md
       - Endpoints: api/endpoints.md

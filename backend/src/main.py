@@ -284,7 +284,7 @@ async def generate_molecule(request: MoleculeGenerationRequest):
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    return {"status": "healthy", "version": app.version}
 
 
 if __name__ == "__main__":

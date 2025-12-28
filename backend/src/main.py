@@ -2,7 +2,7 @@ import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Draw
@@ -45,7 +45,11 @@ class MoleculeResponse(BaseModel):
 
 class MoleculeGenerator:
     @staticmethod
-    def generate_random_molecule(base_smiles: str, num_mutations: int = 3) -> Chem.Mol:
+    def generate_random_molecule(
+        base_smiles: str,
+        num_mutations: int = 3,
+        mutation_types: Optional[List[str]] = None,
+    ) -> Chem.Mol:
         base_mol = Chem.MolFromSmiles(base_smiles)
 
         if base_mol is None:
@@ -54,19 +58,27 @@ class MoleculeGenerator:
         mol = Chem.MolFromSmiles(base_smiles)
 
         for _ in range(num_mutations):
-            mol = MoleculeGenerator._random_mutation(mol)
+            mol = MoleculeGenerator._random_mutation(mol, mutation_types)
 
         return mol
 
     @staticmethod
-    def _random_mutation(mol):
-        mutation_types = [
-            MoleculeGenerator._add_random_substituent,
-            MoleculeGenerator._modify_bond_order,
-            MoleculeGenerator._swap_atom,
-        ]
+    def _random_mutation(mol, mutation_types=None):
+        default_mutation_types = ["substituent", "bond_order", "atom_swap"]
+        if mutation_types is None:
+            mutation_types = default_mutation_types
 
-        mutation_func = np.random.choice(mutation_types)
+        mutation_map = {
+            "substituent": MoleculeGenerator._add_random_substituent,
+            "bond_order": MoleculeGenerator._modify_bond_order,
+            "atom_swap": MoleculeGenerator._swap_atom,
+        }
+
+        available_funcs = [mutation_map[t] for t in mutation_types if t in mutation_map]
+        if not available_funcs:
+            available_funcs = [mutation_map[t] for t in default_mutation_types]
+
+        mutation_func = np.random.choice(available_funcs)
         return mutation_func(mol)
 
     @staticmethod
@@ -275,7 +287,7 @@ async def generate_molecule(request: MoleculeGenerationRequest):
 
         # Generate molecule
         generated_mol = generator.generate_random_molecule(
-            request.base_smiles, request.num_mutations
+            request.base_smiles, request.num_mutations, request.mutation_types
         )
 
         # Convert to SMILES

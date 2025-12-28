@@ -116,7 +116,7 @@ Generates a new molecule by applying random mutations to a base molecule.
 ```json
 {
   "status": "healthy",
-  "version": "0.1.0"
+  "version": "1.0.0"
 }
 ```
 

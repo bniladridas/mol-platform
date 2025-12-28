@@ -149,23 +149,6 @@ Provides service status confirmation.
 }
 ```
 
-**Response**
-
-```json
-{
-  "original_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
-  "generated_smiles": "CC(=O)OC1=CC=CC=C1C(=O)OC",
-  "molecular_image": "base64_encoded_png",
-  "properties": {
-    "Molecular Weight": 180.16,
-    "LogP": 1.31,
-    "H-Bond Donors": 1,
-    "H-Bond Acceptors": 3,
-    "Topological Polar Surface Area": 63.6
-  }
-}
-```
-
 ---
 
 ### Health Check

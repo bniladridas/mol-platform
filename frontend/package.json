@@ -34,7 +34,7 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.3",
+    "tailwindcss": "^4.1.18",
     "postcss": "^8.4.35",
     "autoprefixer": "^10.4.18",
     "cypress": "^13.6.0"

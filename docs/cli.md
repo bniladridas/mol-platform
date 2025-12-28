@@ -17,10 +17,141 @@ No additional installation required. The CLI is included with the codebase.
 
 ## Usage
 
-### Basic Syntax
+### Two Modes of Operation
+
+#### 1. Command Mode (Default)
+
+Execute single commands directly:
 
 ```bash
 python cli.py [OPTIONS] COMMAND
+```
+
+#### 2. Interactive Mode
+
+Start an interactive session for multiple commands:
+
+```bash
+python cli.py --interactive
+```
+
+### Options
+
+- `--url URL`: Backend API URL (default: http://localhost:8000)
+- `--interactive, -i`: Start interactive mode
+- `--help`: Show help message
+
+### Commands
+
+#### Health Check
+
+Test backend connectivity:
+
+```bash
+python cli.py --health
+```
+
+**Output:**
+```
+Connecting to http://localhost:8000
+--------------------------------------------------
+✓ Health check passed: {'status': 'healthy', 'version': '1.0.0'}
+--------------------------------------------------
+✓ All tests passed
+```
+
+#### Molecule Generation
+
+Generate molecules with mutations:
+
+```bash
+python cli.py --generate "SMILES_STRING" [OPTIONS]
+```
+
+**Options:**
+- `--mutations N`: Number of mutations (default: 3)
+- `--types TYPE [TYPE ...]`: Mutation types (substituent, bond_order, atom_swap)
+
+**Examples:**
+
+```bash
+# Basic generation
+python cli.py --generate "CCO"
+
+# Custom mutations
+python cli.py --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
+
+# Specific mutation types
+python cli.py --generate "CCO" --types substituent
+```
+
+**Sample Output:**
+```
+Connecting to http://localhost:8000
+--------------------------------------------------
+Generating molecule from: CCO
+✓ Molecule generation successful
+  Original: CCO
+  Generated: CC(C)O
+  Properties: {
+    "Molecular Weight": 46.07,
+    "LogP": 0.16,
+    "H-Bond Donors": 1,
+    "H-Bond Acceptors": 1,
+    "Topological Polar Surface Area": 20.2
+  }
+--------------------------------------------------
+✓ All tests passed
+```
+
+#### Interactive Mode
+
+Start interactive session:
+
+```bash
+python cli.py --interactive
+```
+
+**Interactive Commands:**
+```
+mol-platform> help
+Available commands:
+  health              - Test API health
+  generate <smiles>   - Generate molecule from SMILES
+  set mutations <n>   - Set number of mutations (default: 3)
+  set types <types>   - Set mutation types (substituent bond_order atom_swap)
+  status              - Show current settings
+  clear               - Clear screen
+  help                - Show this help
+  quit                - Exit interactive mode
+
+Examples:
+  generate CCO
+  set mutations 5
+  set types substituent atom_swap
+  health
+```
+
+**Interactive Session Example:**
+```
+🧬 mol-platform Interactive CLI
+Connected to: http://localhost:8000
+Type 'help' for commands, 'quit' to exit
+--------------------------------------------------
+mol-platform> set mutations 5
+✓ Mutations set to 5
+mol-platform> generate CCO
+Generating molecule from: CCO
+✓ Molecule generation successful
+  Original: CCO
+  Generated: CC(C)(C)O
+  Properties: {...}
+mol-platform> status
+API URL: http://localhost:8000
+Mutations: 5
+Types: ['substituent', 'bond_order', 'atom_swap']
+mol-platform> quit
+Goodbye! 👋
 ```
 
 ### Options

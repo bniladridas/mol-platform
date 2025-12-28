@@ -1,15 +1,15 @@
+import base64
+import io
 import logging
+import random
+from typing import Dict, List, Optional
+
+import numpy as np
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Dict, Optional
-
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Draw
-import numpy as np
-import random
-import base64
-import io
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -124,25 +124,6 @@ class MoleculeGenerator:
             print(f"Error in _add_random_substituent: {e}")
             return mol
 
-            # Randomly select an atom to attach substituent
-            attach_atom_idx = int(np.random.choice(attachable_atoms))
-            substituent = np.random.choice(substituents)
-
-            # Create modified SMILES by adding substituent
-            modified_smiles = (
-                mol_smiles[:attach_atom_idx]
-                + f"({substituent})"
-                + mol_smiles[attach_atom_idx:]
-            )
-
-            # Convert back to molecule
-            mol_result = Chem.MolFromSmiles(modified_smiles)
-
-            return mol_result if mol_result is not None else mol
-        except Exception as e:
-            print(f"Error in _add_random_substituent: {e}")
-            return mol
-
     @staticmethod
     def _modify_bond_order(mol):
         # Ensure input is a valid molecule
@@ -237,27 +218,6 @@ class MoleculeGenerator:
             modified_mol = rw_mol.GetMol()
 
             return modified_mol
-        except Exception as e:
-            print(f"Error in _swap_atom: {e}")
-            return mol
-
-            # Randomly select an atom to swap
-            atom_to_swap_idx = int(np.random.choice(swappable_atoms))
-            current_atom = mol.GetAtomWithIdx(atom_to_swap_idx).GetSymbol()
-
-            # Get possible swap atoms (excluding current atom)
-            swap_options = [at for at in atom_types if at != current_atom]
-            new_atom = np.random.choice(swap_options)
-
-            # Create modified SMILES by replacing atom
-            modified_smiles = list(mol_smiles)
-            modified_smiles[atom_to_swap_idx] = new_atom
-            modified_smiles = "".join(modified_smiles)
-
-            # Convert back to molecule
-            mol_result = Chem.MolFromSmiles(modified_smiles)
-
-            return mol_result if mol_result is not None else mol
         except Exception as e:
             print(f"Error in _swap_atom: {e}")
             return mol

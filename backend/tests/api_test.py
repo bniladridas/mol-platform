@@ -1,16 +1,18 @@
+import json
 import os
+
+import pytest
 import requests
 from dotenv import load_dotenv
-import json
-import pytest
 
 # Load environment variables
 load_dotenv()
 
+
 def test_nvidia_genmol_api():
     # Get API credentials
-    api_key = os.getenv('NVIDIA_GENMOL_API_KEY')
-    endpoint = os.getenv('NVIDIA_GENMOL_ENDPOINT')
+    api_key = os.getenv("NVIDIA_GENMOL_API_KEY")
+    endpoint = os.getenv("NVIDIA_GENMOL_ENDPOINT")
 
     if not api_key or not endpoint:
         pytest.skip("NVIDIA API credentials not set")
@@ -19,27 +21,20 @@ def test_nvidia_genmol_api():
     # API key loaded (value not logged)
 
     # Prepare headers and payload
-    headers = {
-        'Authorization': f'Bearer {api_key}',
-        'Content-Type': 'application/json'
-    }
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
     payload = {
-        'smiles': 'C124CN3C1.S3(=O)(=O)CC.C4C#N.[*{20-20}]',
-        'num_molecules': '30',
-        'temperature': '1',
-        'noise': '0',
-        'step_size': '1',
-        'scoring': 'QED'
+        "smiles": "C124CN3C1.S3(=O)(=O)CC.C4C#N.[*{20-20}]",
+        "num_molecules": "30",
+        "temperature": "1",
+        "noise": "0",
+        "step_size": "1",
+        "scoring": "QED",
     }
 
     try:
         # Send POST request
-        response = requests.post(
-            endpoint, 
-            headers=headers, 
-            data=json.dumps(payload)
-        )
+        response = requests.post(endpoint, headers=headers, data=json.dumps(payload))
 
         # Print detailed response information
         print("\nResponse Details:")
@@ -47,7 +42,7 @@ def test_nvidia_genmol_api():
         print("Headers:")
         for key, value in response.headers.items():
             print(f"  {key}: {value}")
-        
+
         print("\nResponse Content:")
         print(response.text)
 
@@ -58,5 +53,6 @@ def test_nvidia_genmol_api():
         print(f"\nRequest Error: {e}")
         print(f"Full Error Details: {str(e)}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test_nvidia_genmol_api()

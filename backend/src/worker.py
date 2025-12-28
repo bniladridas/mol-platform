@@ -1,10 +1,11 @@
 from celery import Celery
+
 from src.config import settings
 
 # Create Celery app
-app = Celery('tasks', 
-             broker=settings.CELERY_BROKER_URL, 
-             backend=settings.CELERY_RESULT_BACKEND)
+app = Celery(
+    "tasks", broker=settings.CELERY_BROKER_URL, backend=settings.CELERY_RESULT_BACKEND
+)
 
 # Optional: Configure Celery
 app.conf.update(
@@ -15,5 +16,5 @@ app.conf.update(
 # Import tasks to register them
 
 # This is important for Celery to discover tasks
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.start()

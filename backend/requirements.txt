@@ -19,9 +19,9 @@ celery==5.3.4
 redis==5.0.1
 
 # Authentication
-python-jose==3.3.0
+python-jose==3.4.0
 passlib==1.7.4
-python-multipart==0.0.6
+python-multipart==0.0.18
 
 # Background Tasks
 # asyncio is built-in
@@ -30,7 +30,7 @@ python-multipart==0.0.6
 email-validator==2.1.1
 
 # Deployment & Monitoring
-sentry-sdk==1.38.0
+sentry-sdk==1.45.1
 
 # Testing
 pytest==7.4.4
@@ -40,4 +40,4 @@ ruff
 
 # Utilities
 python-dotenv==1.0.0
-requests==2.31.0
+requests==2.32.4

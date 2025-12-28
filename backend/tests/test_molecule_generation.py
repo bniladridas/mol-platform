@@ -58,3 +58,23 @@ def test_mutation_strategies():
         assert mutated_mol is not None
         assert isinstance(mutated_mol, Chem.Mol)
         assert Chem.MolToSmiles(mutated_mol) != base_smiles
+
+
+def test_generate_with_custom_mutations():
+    base_smiles = "CCO"  # Ethanol
+    generator = MoleculeGenerator()
+
+    # Test with specific mutation types
+    generated_mol = generator.generate_random_molecule(
+        base_smiles, mutation_types=["substituent"]
+    )
+    assert generated_mol is not None
+
+    generated_mol = generator.generate_random_molecule(
+        base_smiles, mutation_types=["atom_swap"]
+    )
+    assert generated_mol is not None
+
+    # Test with empty mutation types (should use defaults)
+    generated_mol = generator.generate_random_molecule(base_smiles, mutation_types=[])
+    assert generated_mol is not None

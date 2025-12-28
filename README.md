@@ -45,7 +45,25 @@ node --version
 docker-compose up --build
 ```
 
----
+## Run Locally (Development)
+
+For local development without Docker:
+
+### Backend
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python src/main.py
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npx react-scripts start
+```
 
 ## Access Points
 
@@ -111,7 +129,7 @@ Generates a new molecule by applying random mutations to a base molecule.
 ### Backend Unit Tests (Local)
 
 ```bash
-brew install python@3.11
+brew install python@3.12
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r backend/requirements.txt

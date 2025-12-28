@@ -33,15 +33,17 @@ brew install git
 
 3. **For local development:**
    ```bash
-   # Backend
+   # Backend setup
    cd backend
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install -r requirements.txt
+   python src/main.py  # Start backend server
 
-   # Frontend
+   # Frontend setup (in separate terminal)
    cd ../frontend
    npm install
+   npx react-scripts start  # Start frontend development server
    ```
 
 ## Next Steps

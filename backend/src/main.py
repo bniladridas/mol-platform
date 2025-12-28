@@ -4,11 +4,14 @@ import logging
 import random
 from typing import Dict, List, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Draw
+
+from config import settings
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -18,6 +21,8 @@ app = FastAPI(
     description="Containerized microservice for molecular simulation and mutation analysis",
     version="1.0.0",
 )
+
+security = HTTPBearer()
 
 # CORS Configuration
 app.add_middleware(
@@ -40,6 +45,12 @@ class MoleculeResponse(BaseModel):
     generated_smiles: str
     molecular_image: str
     properties: Dict[str, float]
+
+
+def verify_api_key(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    if credentials.credentials != settings.API_KEY:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    return credentials.credentials
 
 
 class MoleculeGenerator:
@@ -251,7 +262,11 @@ class MoleculeGenerator:
         return base64.b64encode(buffered.getvalue()).decode()
 
 
-@app.post("/generate_molecule", response_model=MoleculeResponse)
+@app.post(
+    "/generate_molecule",
+    response_model=MoleculeResponse,
+    dependencies=[Depends(verify_api_key)],
+)
 async def generate_molecule(request: MoleculeGenerationRequest):
     # Validate inputs
     if not request.base_smiles or not request.base_smiles.strip():
@@ -290,7 +305,7 @@ async def generate_molecule(request: MoleculeGenerationRequest):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@app.get("/health")
+@app.get("/health", dependencies=[Depends(verify_api_key)])
 async def health_check():
     return {"status": "healthy", "version": app.version}
 

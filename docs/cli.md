@@ -1,10 +1,10 @@
 # Command Line Interface
 
-The mol-platform CLI provides command-line access to molecular generation and testing capabilities.
+The mol-platform --api-key your-key CLI provides command-line access to molecular generation and testing capabilities.
 
 ## Overview
 
-The CLI tool (`mol-platform`) allows you to interact with the mol-platform API without the web interface, making it ideal for:
+The CLI tool (`mol-platform --api-key your-key`) allows you to interact with the mol-platform --api-key your-key API without the web interface, making it ideal for:
 
 - Automated testing
 - Scripting and integration
@@ -21,7 +21,7 @@ python3 -m venv venv && source venv/bin/activate && pip install build && python 
 pipx install dist/mol_platform-1.0.0-py3-none-any.whl
 ```
 
-This installs the `mol-platform` command globally.
+This installs the `mol-platform --api-key your-key` command globally.
 
 ## Usage
 
@@ -32,7 +32,7 @@ This installs the `mol-platform` command globally.
 Execute single commands directly:
 
 ```bash
-mol-platform [OPTIONS] COMMAND
+mol-platform --api-key your-key [OPTIONS] COMMAND
 ```
 
 #### 2. Interactive Mode
@@ -40,7 +40,7 @@ mol-platform [OPTIONS] COMMAND
 Start an interactive session for multiple commands:
 
 ```bash
-mol-platform --interactive
+mol-platform --api-key your-key --interactive
 ```
 
 ### Options
@@ -56,7 +56,7 @@ mol-platform --interactive
 Test backend connectivity:
 
 ```bash
-mol-platform --health
+mol-platform --api-key your-key --health
 ```
 
 **Output:**
@@ -73,7 +73,7 @@ Connecting to http://localhost:8000
 Generate molecules with mutations:
 
 ```bash
-mol-platform --generate "SMILES_STRING" [OPTIONS]
+mol-platform --api-key your-key --generate "SMILES_STRING" [OPTIONS]
 ```
 
 **Options:**
@@ -84,13 +84,13 @@ mol-platform --generate "SMILES_STRING" [OPTIONS]
 
 ```bash
 # Basic generation
-mol-platform --generate "CCO"
+mol-platform --api-key your-key --generate "CCO"
 
 # Custom mutations
-mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
+mol-platform --api-key your-key --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
 
 # Specific mutation types
-mol-platform --generate "CCO" --types substituent
+mol-platform --api-key your-key --generate "CCO" --types substituent
 ```
 
 **Sample Output:**
@@ -117,12 +117,12 @@ Generating molecule from: CCO
 Start interactive session:
 
 ```bash
-mol-platform --interactive
+mol-platform --api-key your-key --interactive
 ```
 
 **Interactive Commands:**
 ```
-mol-platform> help
+mol-platform --api-key your-key> help
 Available commands:
   health              - Test API health
   generate <smiles>   - Generate molecule from SMILES
@@ -142,23 +142,23 @@ Examples:
 
 **Interactive Session Example:**
 ```
-🧬 mol-platform Interactive CLI
+🧬 mol-platform --api-key your-key Interactive CLI
 Connected to: http://localhost:8000
 Type 'help' for commands, 'quit' to exit
 --------------------------------------------------
-mol-platform> set mutations 5
+mol-platform --api-key your-key> set mutations 5
 ✓ Mutations set to 5
-mol-platform> generate CCO
+mol-platform --api-key your-key> generate CCO
 Generating molecule from: CCO
 ✓ Molecule generation successful
   Original: CCO
   Generated: CC(C)(C)O
   Properties: {...}
-mol-platform> status
+mol-platform --api-key your-key> status
 API URL: http://localhost:8000
 Mutations: 5
 Types: ['substituent', 'bond_order', 'atom_swap']
-mol-platform> quit
+mol-platform --api-key your-key> quit
 Goodbye! 👋
 ```
 
@@ -174,7 +174,7 @@ Goodbye! 👋
 Test backend connectivity:
 
 ```bash
-mol-platform --health
+mol-platform --api-key your-key --health
 ```
 
 **Output:**
@@ -191,7 +191,7 @@ Connecting to http://localhost:8000
 Generate molecules with mutations:
 
 ```bash
-mol-platform --generate "SMILES_STRING" [OPTIONS]
+mol-platform --api-key your-key --generate "SMILES_STRING" [OPTIONS]
 ```
 
 **Options:**
@@ -202,13 +202,13 @@ mol-platform --generate "SMILES_STRING" [OPTIONS]
 
 ```bash
 # Basic generation
-mol-platform --generate "CCO"
+mol-platform --api-key your-key --generate "CCO"
 
 # Custom mutations
-mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
+mol-platform --api-key your-key --generate "CC(=O)OC1=CC=CC=C1C(=O)O" --mutations 2
 
 # Specific mutation types
-mol-platform --generate "CCO" --types substituent atom_swap
+mol-platform --api-key your-key --generate "CCO" --types substituent atom_swap
 ```
 
 **Sample Output:**
@@ -233,7 +233,7 @@ Generating molecule from: CCO
 ## Prerequisites
 
 - Python 3.12+
-- Running mol-platform backend server
+- Running mol-platform --api-key your-key backend server
 - `requests` library (included in backend environment)
 
 ## Error Handling
@@ -251,8 +251,8 @@ The CLI provides clear error messages:
 ```yaml
 - name: Test CLI
   run: |
-    mol-platform --health
-    mol-platform --generate "CCO"
+    mol-platform --api-key your-key --health
+    mol-platform --api-key your-key --generate "CCO"
 ```
 
 ### Scripting
@@ -261,12 +261,12 @@ The CLI provides clear error messages:
 import subprocess
 
 # Health check
-result = subprocess.run(["mol-platform", "--health"], capture_output=True)
+result = subprocess.run(["mol-platform --api-key your-key", "--health"], capture_output=True)
 print("Exit code:", result.returncode)
 
 # Generation
 result = subprocess.run([
-    "mol-platform", "--generate", "CCO", "--mutations", "1"
+    "mol-platform --api-key your-key", "--generate", "CCO", "--mutations", "1"
 ], capture_output=True)
 print("Output:", result.stdout.decode())
 ```

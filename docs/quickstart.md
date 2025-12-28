@@ -60,10 +60,10 @@ python3 -m venv venv && source venv/bin/activate && pip install build && python 
 pipx install dist/mol_platform-1.0.0-py3-none-any.whl
 
 # Test health
-mol-platform --health
+mol-platform --api-key your-key --health
 
 # Generate molecule
-mol-platform --generate "CCO"
+mol-platform --api-key your-key --generate "CCO"
 ```
 
 ## What's Next?

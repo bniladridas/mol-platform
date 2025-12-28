@@ -16,15 +16,17 @@ import requests
 class CLISession:
     """CLI session state manager."""
 
-    def __init__(self):
+    def __init__(self, api_key: str):
+        self.api_key = api_key
         self.mutations = 3
         self.types = ["substituent", "bond_order", "atom_swap"]
 
 
-def test_health(base_url: str) -> bool:
+def test_health(base_url: str, api_key: str) -> bool:
     """Test the health endpoint."""
     try:
-        response = requests.get(f"{base_url}/health")
+        headers = {"Authorization": f"Bearer {api_key}"}
+        response = requests.get(f"{base_url}/health", headers=headers)
         if response.status_code == 200:
             data = response.json()
             print(f"✓ Health check passed: {data}")
@@ -38,7 +40,11 @@ def test_health(base_url: str) -> bool:
 
 
 def generate_molecule(
-    base_url: str, smiles: str, mutations: int = 3, types: Optional[list] = None
+    base_url: str,
+    api_key: str,
+    smiles: str,
+    mutations: int = 3,
+    types: Optional[list] = None,
 ) -> bool:
     """Generate a molecule via API."""
     payload = {
@@ -48,10 +54,14 @@ def generate_molecule(
     }
 
     try:
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+        }
         response = requests.post(
             f"{base_url}/generate_molecule",
             json=payload,
-            headers={"Content-Type": "application/json"},
+            headers=headers,
         )
 
         if response.status_code == 200:
@@ -70,9 +80,9 @@ def generate_molecule(
         return False
 
 
-def interactive_mode(base_url: str):
+def interactive_mode(base_url: str, api_key: str):
     """Run interactive CLI mode."""
-    session = CLISession()
+    session = CLISession(api_key)
 
     print("🧬 mol-platform Interactive CLI")
     print(f"Connected to: {base_url}")
@@ -126,7 +136,7 @@ Examples:
             command = parts[0].lower()
 
             if command == "health":
-                test_health(base_url)
+                test_health(base_url, session.api_key)
 
             elif command == "generate":
                 if len(parts) < 2:
@@ -135,7 +145,9 @@ Examples:
                     continue
                 smiles = parts[1]
                 print(f"Generating molecule from: {smiles}")
-                generate_molecule(base_url, smiles, session.mutations, session.types)
+                generate_molecule(
+                    base_url, session.api_key, smiles, session.mutations, session.types
+                )
 
             elif command == "set":
                 if len(parts) < 3:
@@ -188,12 +200,12 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  mol-platform --health
-  mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
-  mol-platform --interactive
+  mol-platform --api-key your-key --health
+  mol-platform --api-key your-key --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
+  mol-platform --api-key your-key --interactive
 
 Interactive mode:
-  mol-platform --interactive
+  mol-platform --api-key your-key --interactive
   Then type commands like: generate CCO, set mutations 5, health, etc.
         """,
     )
@@ -202,6 +214,12 @@ Interactive mode:
         "--url",
         default="http://localhost:8000",
         help="Backend API URL (default: http://localhost:8000)",
+    )
+
+    parser.add_argument(
+        "--api-key",
+        required=True,
+        help="API key for authentication",
     )
 
     parser.add_argument(
@@ -229,7 +247,7 @@ Interactive mode:
     args = parser.parse_args()
 
     if args.interactive:
-        interactive_mode(args.url)
+        interactive_mode(args.url, args.api_key)
         return 0
 
     if not args.health and not args.generate:
@@ -242,34 +260,12 @@ Interactive mode:
     success = True
 
     if args.health:
-        success &= test_health(args.url)
+        success &= test_health(args.url, args.api_key)
 
     if args.generate:
         print(f"Generating molecule from: {args.generate}")
         success &= generate_molecule(
-            args.url, args.generate, args.mutations, args.types
-        )
-
-    print("-" * 50)
-    if success:
-        print("✓ All tests passed")
-        return 0
-    else:
-        print("✗ Some tests failed")
-        return 1
-
-    print(f"Connecting to {args.url}")
-    print("-" * 50)
-
-    success = True
-
-    if args.health:
-        success &= test_health(args.url)
-
-    if args.generate:
-        print(f"Generating molecule from: {args.generate}")
-        success &= generate_molecule(
-            args.url, args.generate, args.mutations, args.types
+            args.url, args.api_key, args.generate, args.mutations, args.types
         )
 
     print("-" * 50)

@@ -30,10 +30,10 @@ python3 -m venv venv && source venv/bin/activate && pip install build && python 
 pipx install dist/mol_platform-1.0.0-py3-none-any.whl
 
 # Test health
-mol-platform --health
+mol-platform --api-key your-key --health
 
 # Generate molecule
-mol-platform --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
+mol-platform --api-key your-key --generate "CC(=O)OC1=CC=CC=C1C(=O)O"
 ```
 
 ## Access Points

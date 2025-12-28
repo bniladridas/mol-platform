@@ -1,6 +1,6 @@
 # mol-platform
 
-A containerized microservice for molecular analysis, simulation, and visualization. Developed with consideration for reproducibility, modularity, and scalability through Docker.
+A containerized microservice for molecular analysis, simulation, and visualization. Developed with consideration for reproducibility, modularity, and scalability through Docker. Includes provisions for AI-powered molecular generation.
 
 ---
 

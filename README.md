@@ -151,19 +151,6 @@ Provides service status confirmation.
 
 ---
 
-### Health Check
-
-**Endpoint:** `GET /health`
-
-```json
-{
-  "status": "healthy",
-  "version": "1.0.0"
-}
-```
-
----
-
 ## Testing
 
 > These steps are **optional** if you only use Docker. They are recommended for contributors and CI parity.

@@ -2,7 +2,6 @@ import base64
 import io
 import logging
 import random
-from functools import lru_cache
 from typing import Dict, List, Optional
 
 import numpy as np

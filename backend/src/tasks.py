@@ -1,7 +1,7 @@
 from src.worker import app
 import logging
 from rdkit import Chem
-from rdkit.Chem import AllChem, Descriptors, Crippen, Draw
+from rdkit.Chem import Descriptors, Crippen, Draw
 import random
 import base64
 import io
@@ -79,7 +79,7 @@ def _add_random_substituent(mol):
                 new_mol = Chem.RWMol(mol)
                 new_substituent = Chem.MolFromSmarts(substituent)
                 new_mol.ReplaceSubstructs(
-                    Chem.MolFromSmarts(f'[#1:1]'),
+                    Chem.MolFromSmarts('[#1:1]'),
                     new_substituent,
                     idx
                 )

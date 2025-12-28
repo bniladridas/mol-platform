@@ -13,7 +13,6 @@ app.conf.update(
 )
 
 # Import tasks to register them
-from src import tasks
 
 # This is important for Celery to discover tasks
 if __name__ == '__main__':

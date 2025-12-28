@@ -2,6 +2,7 @@ import base64
 import io
 import logging
 import random
+from functools import lru_cache
 from typing import Dict, List, Optional
 
 import numpy as np
@@ -235,7 +236,11 @@ class MoleculeGenerator:
             return mol
 
     @staticmethod
-    def calculate_properties(mol):
+    @lru_cache(maxsize=128)
+    def calculate_properties(smiles: str) -> Dict[str, float]:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
+            return {}
         return {
             "Molecular Weight": Descriptors.ExactMolWt(mol),
             "LogP": Descriptors.MolLogP(mol),
@@ -266,7 +271,7 @@ async def generate_molecule(request: MoleculeGenerationRequest):
         generated_smiles = Chem.MolToSmiles(generated_mol)
 
         # Calculate properties
-        properties = generator.calculate_properties(generated_mol)
+        properties = generator.calculate_properties(generated_smiles)
 
         # Generate molecule image
         molecule_image = generator.generate_molecule_image(generated_mol)

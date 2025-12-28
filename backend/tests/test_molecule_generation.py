@@ -25,9 +25,10 @@ def test_molecule_properties():
 
     # Generate a molecule
     generated_mol = generator.generate_random_molecule(base_smiles)
+    generated_smiles = Chem.MolToSmiles(generated_mol)
 
     # Calculate properties
-    properties = generator.calculate_properties(generated_mol)
+    properties = generator.calculate_properties(generated_smiles)
 
     # Check that properties are calculated
     assert "Molecular Weight" in properties

@@ -2,10 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    # Database settings
-    DATABASE_URL: str = "postgresql://user:password@database/mol_platform"
-
-    # Celery settings
+    # Celery settings (for future async processing)
     CELERY_BROKER_URL: str = "redis://redis:6379/0"
     CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
 

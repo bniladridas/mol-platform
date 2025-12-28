@@ -4,7 +4,7 @@ import logging
 import random
 from typing import Dict, List, Optional
 
-import numpy as np
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -78,7 +78,7 @@ class MoleculeGenerator:
         if not available_funcs:
             available_funcs = [mutation_map[t] for t in default_mutation_types]
 
-        mutation_func = np.random.choice(available_funcs)
+        mutation_func = random.choice(available_funcs)
         return mutation_func(mol)
 
     @staticmethod
@@ -103,8 +103,8 @@ class MoleculeGenerator:
                 return mol
 
             # Randomly select an atom to attach substituent
-            attach_atom_idx = int(np.random.choice(attachable_atoms))
-            substituent_symbol = np.random.choice(substituents)
+            attach_atom_idx = random.choice(attachable_atoms)
+            substituent_symbol = random.choice(substituents)
 
             # Create editable molecule
             rw_mol = Chem.RWMol(mol)
@@ -144,7 +144,7 @@ class MoleculeGenerator:
                 return mol
 
             # Randomly select a bond
-            bond_to_modify = np.random.choice(bonds)
+            bond_to_modify = random.choice(bonds)
 
             # Prepare bond order options
             bond_orders = [
@@ -206,12 +206,12 @@ class MoleculeGenerator:
                 return mol
 
             # Randomly select an atom to swap
-            atom_to_swap_idx = int(np.random.choice(swappable_atoms))
+            atom_to_swap_idx = random.choice(swappable_atoms)
             current_atom = mol.GetAtomWithIdx(atom_to_swap_idx).GetSymbol()
 
             # Get possible swap atoms (excluding current atom)
             swap_options = [at for at in atom_types if at != current_atom]
-            new_atom_symbol = np.random.choice(swap_options)
+            new_atom_symbol = random.choice(swap_options)
 
             # Create editable molecule and swap atom
             rw_mol = Chem.RWMol(mol)

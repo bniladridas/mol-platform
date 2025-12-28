@@ -17,7 +17,7 @@ If you are developing or running tests locally on macOS, install the following u
 
 ```bash
 brew install docker docker-compose
-brew install python@3.11
+brew install python@3.12
 brew install node
 brew install git
 ```

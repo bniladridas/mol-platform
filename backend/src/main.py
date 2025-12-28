@@ -118,8 +118,11 @@ class MoleculeGenerator:
 
             # Get immutable molecule
             modified_mol = rw_mol.GetMol()
-
-            return modified_mol
+            try:
+                Chem.SanitizeMol(modified_mol)
+                return modified_mol
+            except:
+                return mol
         except Exception as e:
             print(f"Error in _add_random_substituent: {e}")
             return mol
@@ -171,9 +174,12 @@ class MoleculeGenerator:
             rw_mol.AddBond(start_atom, end_atom, new_bond_type)
 
             # Convert back to immutable molecule
-            mol_result = Chem.MolFromSmiles(Chem.MolToSmiles(rw_mol))
-
-            return mol_result if mol_result is not None else mol
+            modified_mol = rw_mol.GetMol()
+            try:
+                Chem.SanitizeMol(modified_mol)
+                return modified_mol
+            except:
+                return mol
         except Exception as e:
             print(f"Error in _modify_bond_order: {e}")
             return mol
@@ -216,8 +222,11 @@ class MoleculeGenerator:
 
             # Get immutable molecule
             modified_mol = rw_mol.GetMol()
-
-            return modified_mol
+            try:
+                Chem.SanitizeMol(modified_mol)
+                return modified_mol
+            except:
+                return mol
         except Exception as e:
             print(f"Error in _swap_atom: {e}")
             return mol

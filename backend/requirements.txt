@@ -16,7 +16,7 @@ Pillow
 
 # Task Queue
 celery==5.3.4
-redis==5.0.1
+redis==7.1.0
 
 # Authentication
 python-jose==3.3.0

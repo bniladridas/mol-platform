@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/basebin/molplatform/main/.github/assets/thumbnail.png" alt="molplatform" width="100%">
+</p>
+
 # mol-platform
 
 A containerized microservice for molecular generation and analysis. Generates molecular variants through systematic mutations using RDKit. Features a REST API, web interface, and CLI tool with secure API key authentication.
